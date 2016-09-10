@@ -7,13 +7,12 @@ import java.util.HashMap;
 
 import mazeGenerators.algorithms.Maze3d;
 import model.Model;
-import view.View;
 
 /**
  * @author bensu
  *
  */
-public class SaveMaze implements Command {
+public class LoadMaze implements Command {
 	private String mazeName;
 	private String fileName;
 	private HashMap<String, Maze3d> mazes;
@@ -28,7 +27,7 @@ public class SaveMaze implements Command {
 	 * @param model
 	 * @param controller
 	 */
-	public SaveMaze(String mazeName, String fileName, HashMap<String, Maze3d> mazes, Model model, Controller controller) {
+	public LoadMaze(String mazeName, String fileName, HashMap<String, Maze3d> mazes, Model model, Controller controller) {
 		this.mazeName = mazeName;
 		this.fileName = fileName;
 		this.mazes = mazes;
@@ -40,10 +39,10 @@ public class SaveMaze implements Command {
 	 */
 	@Override
 	public void doCommand() {
-		if (!mazes.containsKey(mazeName))
-			controller.print("No such maze " + mazeName);
+		if (mazes.containsKey(mazeName))
+			controller.print("Maze '" + mazeName + "' already exist!");
 		else {
-			model.saveMaze(mazes.get(mazeName), fileName);
+			model.loadMaze(mazeName, fileName);
 		}
 	}
 

@@ -13,17 +13,17 @@ import view.View;
  *
  */
 public class Display implements Command {
-	View view;
-	String mazeName;
-	HashMap<String, Maze3d> mazes;
+	private Controller controller;
+	private String mazeName;
+	private HashMap<String, Maze3d> mazes;
 	
 	/**
 	 * C'tor
 	 * @param controller
 	 * @param view
 	 */
-	public Display(View view, String mazeName, HashMap<String, Maze3d> mazes) {
-		this.view = view;
+	public Display(Controller controller, String mazeName, HashMap<String, Maze3d> mazes) {
+		this.controller = controller;
 		this.mazeName = mazeName;
 		this.mazes = mazes;
 	}
@@ -45,7 +45,7 @@ public class Display implements Command {
 			sb.append(maze2dToString(maze.getCrossSectionByZ(maze.getFlos() -1)));
 		}
 		// Print using view pring method
-		view.print(sb.toString());
+		controller.print(sb.toString());
 	}
 	
 	/**

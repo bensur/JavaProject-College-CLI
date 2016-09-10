@@ -13,19 +13,19 @@ import view.View;
  *
  */
 public class DisplayCrossSection implements Command {
-	View view;
-	String mazeName;
-	HashMap<String, Maze3d> mazes;
-	char axis;
-	int index;
+	private Controller controller;
+	private String mazeName;
+	private HashMap<String, Maze3d> mazes;
+	private char axis;
+	private int index;
 	
 	/**
 	 * C'tor
 	 * @param controller
 	 * @param view
 	 */
-	public DisplayCrossSection(View view, String mazeName, HashMap<String, Maze3d> mazes, char axis, int index) {
-		this.view = view;
+	public DisplayCrossSection(Controller controller, String mazeName, HashMap<String, Maze3d> mazes, char axis, int index) {
+		this.controller = controller;
 		this.mazeName = mazeName;
 		this.mazes = mazes;
 		this.axis = axis;
@@ -52,7 +52,7 @@ public class DisplayCrossSection implements Command {
 				throw new IllegalArgumentException("No such axis " + axis);
 			sb.append(maze2dToString(maze2d));
 		}
-		view.print(sb.toString());
+		controller.print(sb.toString());
 	}
 	
 	/**

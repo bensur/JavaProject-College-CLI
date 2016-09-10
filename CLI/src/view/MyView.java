@@ -19,7 +19,7 @@ import controller.Dir;
  */
 public class MyView implements View {
 	private Controller controller;
-	private Dir dir = new Dir("/", this);
+	private Dir dir = new Dir("/", controller);
 	private CLI cli = new CLI(new BufferedReader(new InputStreamReader(System.in)), new PrintWriter(System.out), new HashMap<String, Command>());
 	
 //	public MyView (Controller controller) {

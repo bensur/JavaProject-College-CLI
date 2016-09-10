@@ -16,13 +16,13 @@ import view.View;
  */
 public class Dir implements Command {
 	//private URI uri;
-	private View view;
+	private Controller controller;
 	private File file;
 	private String[] filesList;
 	//private String path;
 	
-	public Dir(String url, View view) {
-		this.view = view;
+	public Dir(String url, Controller controller) {
+		this.controller = controller;
 		file = new File(url);
 	}
 	
@@ -35,11 +35,11 @@ public class Dir implements Command {
 			filesList = file.list();
 			for (int i = 0; i < filesList.length; i++) {
 				//System.out.println(filesList[i]);
-				view.print(filesList[i]);
+				controller.print(filesList[i]);
 			}
 		}
 		else {
-			view.print("Not a directory");
+			controller.print("Not a directory");
 		}
 	}
 
