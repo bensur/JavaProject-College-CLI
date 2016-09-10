@@ -60,4 +60,11 @@ public class MyController implements Controller {
 	public void print(String string) {
 		view.print(string);
 	}
+
+	@Override
+	public void addMaze(String mazeName, Maze3d maze) {
+		// TODO Auto-generated method stub
+		mazes.put(mazeName, maze);
+		print("Maze '" + mazeName + "' is ready");
+	}
 }

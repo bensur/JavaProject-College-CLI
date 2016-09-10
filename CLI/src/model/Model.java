@@ -27,4 +27,13 @@ public interface Model {
 	 * @param fileName
 	 */
 	public void saveMaze(Maze3d maze, String fileName);
+	
+	/**
+	 * 
+	 * @param mazeName
+	 * @param floors
+	 * @param rows
+	 * @param columns
+	 */
+	public void GenerateMaze(String mazeName, int floors, int rows, int columns, String alg);
 }

@@ -3,6 +3,7 @@
  */
 package controller;
 
+import mazeGenerators.algorithms.Maze3d;
 import model.Model;
 import view.View;
 
@@ -36,4 +37,11 @@ public interface Controller {
 	 * @param string
 	 */
 	public void print(String string);
+	
+	/**
+	 * 
+	 * @param mazeName
+	 * @param generate
+	 */
+	public void addMaze(String mazeName, Maze3d maze);
 }

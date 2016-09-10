@@ -18,10 +18,6 @@ import mazeGenerators.algorithms.Maze3d;
  */
 public class MyModel implements Model {
 	private Controller controller;
-	
-//	public MyModel (Controller controller) {
-//		this.controller = controller;
-//	}
 
 	/**
 	 * @return the controller
@@ -53,5 +49,11 @@ public class MyModel implements Model {
 			controller.print("IOException occured while saving to '" + fileName +"'");
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void GenerateMaze(String mazeName, int floors, int rows, int columns, String alg) {
+		// TODO Auto-generated method stub
+//		Thread t = new Thread(new GenerateMaze());
 	}
 }
