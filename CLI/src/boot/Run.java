@@ -23,6 +23,8 @@ public class Run {
 		Controller controller = new MyController();
 		View view = new MyView();
 		Model model = new MyModel();
+		
+		view.start();
 	}
 
 }

@@ -6,10 +6,12 @@ package view;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.URI;
 import java.util.HashMap;
 
 import controller.Command;
 import controller.Controller;
+import controller.Dir;
 
 /**
  * @author yschori
@@ -17,6 +19,7 @@ import controller.Controller;
  */
 public class MyView implements View {
 	private Controller controller;
+	private Dir dir = new Dir("/", this);
 	private CLI cli = new CLI(new BufferedReader(new InputStreamReader(System.in)), new PrintWriter(System.out), new HashMap<String, Command>());
 	
 //	public MyView (Controller controller) {
@@ -24,7 +27,8 @@ public class MyView implements View {
 //	}
 	
 	public void start() {
-		cli.start();
+		dir.doCommand();
+		//cli.start();
 	}
 
 	/**
@@ -46,6 +50,7 @@ public class MyView implements View {
 	 * @param s String to print
 	 */
 	public void print(String s) {
-		cli.print(s);
+		//cli.print(s);
+		System.out.println(s);
 	}
 }

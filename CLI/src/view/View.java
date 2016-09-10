@@ -20,6 +20,8 @@ public interface View {
 	 */
 	public void setController(Controller controller);
 	
+	public void start();
+	
 	/**
 	 * 
 	 * @param s String to print
