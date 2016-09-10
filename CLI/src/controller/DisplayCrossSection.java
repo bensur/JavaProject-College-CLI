@@ -12,39 +12,46 @@ import view.View;
  * @author bensu
  *
  */
-public class Display implements Command {
+public class DisplayCrossSection implements Command {
 	View view;
 	String mazeName;
 	HashMap<String, Maze3d> mazes;
+	char axis;
+	int index;
 	
 	/**
 	 * C'tor
 	 * @param controller
 	 * @param view
 	 */
-	public Display(View view, String mazeName, HashMap<String, Maze3d> mazes) {
+	public DisplayCrossSection(View view, String mazeName, HashMap<String, Maze3d> mazes, char axis, int index) {
 		this.view = view;
 		this.mazeName = mazeName;
 		this.mazes = mazes;
+		this.axis = axis;
+		this.index = index;
 	}
-	
 	/* (non-Javadoc)
 	 * @see controller.Command#doCommand()
 	 */
 	@Override
 	public void doCommand() {
-		// Add error msg if no such mazeName
 		StringBuilder sb = new StringBuilder();
-		if (!mazes.containsKey(mazeName)) {
+		if (!mazes.containsKey(mazeName))
 			sb.append("No such maze " + mazeName);
-		} else { // Convert maze to string
+		else {
 			Maze3d maze = mazes.get(mazeName);
-			for (int z = 0 ; z < maze.getFlos() -1 ; z++) {
-				sb.append(maze2dToString(maze.getCrossSectionByZ(z)) + "\n");
-			}
-			sb.append(maze2dToString(maze.getCrossSectionByZ(maze.getFlos() -1)));
+			int[][] maze2d;
+			if (axis == 'X')
+				maze2d = maze.getCrossSectionByX(index);
+			else if (axis == 'Y')
+				maze2d = maze.getCrossSectionByY(index);
+			else if (axis == 'Z')
+				maze2d = maze.getCrossSectionByZ(index);
+			else
+				throw new IllegalArgumentException("No such axis " + axis);
+			sb.append(maze2dToString(maze2d));
 		}
-		// Print using view pring method
 		view.print(sb.toString());
 	}
 	
@@ -68,5 +75,4 @@ public class Display implements Command {
 		System.out.println("}");
 		return sb.toString();
 	}
-	
 }

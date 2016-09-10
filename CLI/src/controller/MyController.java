@@ -52,4 +52,12 @@ public class MyController implements Controller {
 	public HashMap<String, Maze3d> getMazes() {
 		return mazes;
 	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public void print(String string) {
+		view.print(string);
+	}
 }

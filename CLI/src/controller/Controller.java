@@ -30,4 +30,10 @@ public interface Controller {
 	 * @param model the model to set
 	 */
 	public void setModel(Model model);
+	
+	/**
+	 * 
+	 * @param string
+	 */
+	public void print(String string);
 }
