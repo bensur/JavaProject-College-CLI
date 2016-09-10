@@ -19,4 +19,10 @@ public interface View {
 	 * @param controller the controller to set
 	 */
 	public void setController(Controller controller);
+	
+	/**
+	 * 
+	 * @param s String to print
+	 */
+	public void print(String s);
 }

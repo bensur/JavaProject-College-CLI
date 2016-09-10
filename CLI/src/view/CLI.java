@@ -50,5 +50,12 @@ public class CLI extends Thread {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * 
+	 * @param s String to print
+	 */
+	public void print(String s) {
+		out.println(s);
+	}
 }

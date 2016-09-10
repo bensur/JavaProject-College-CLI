@@ -40,4 +40,12 @@ public class MyView implements View {
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
+	
+	/**
+	 * 
+	 * @param s String to print
+	 */
+	public void print(String s) {
+		cli.print(s);
+	}
 }

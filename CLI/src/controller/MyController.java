@@ -3,6 +3,9 @@
  */
 package controller;
 
+import java.util.HashMap;
+
+import mazeGenerators.algorithms.Maze3d;
 import model.Model;
 import view.View;
 
@@ -13,11 +16,7 @@ import view.View;
 public class MyController implements Controller {
 	private View view;
 	private Model model;
-	
-//	public MyController (View view, Model model) {
-//		this.view = view;
-//		this.model = model;
-//	}
+	private HashMap<String, Maze3d> mazes;
 
 	/**
 	 * @return the view
@@ -45,5 +44,12 @@ public class MyController implements Controller {
 	 */
 	public void setModel(Model model) {
 		this.model = model;
+	}
+	
+	/**
+	 * @return mazes HashMap
+	 */
+	public HashMap<String, Maze3d> getMazes() {
+		return mazes;
 	}
 }
