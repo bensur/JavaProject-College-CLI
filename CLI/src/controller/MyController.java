@@ -5,6 +5,7 @@ package controller;
 
 import java.util.HashMap;
 
+import algorithms.search.Solution;
 import mazeGenerators.algorithms.Maze3d;
 import model.Model;
 import view.View;
@@ -17,6 +18,7 @@ public class MyController implements Controller {
 	private View view;
 	private Model model;
 	private HashMap<String, Maze3d> mazes;
+	private HashMap<String, Solution> solutions;
 
 	/**
 	 * @return the view
@@ -66,5 +68,11 @@ public class MyController implements Controller {
 		// TODO Auto-generated method stub
 		mazes.put(mazeName, maze);
 		print("Maze '" + mazeName + "' is ready");
+	}
+
+	@Override
+	public void addMazeSolution(String mazeName, Solution solution) {
+		solutions.put(mazeName, solution);
+		print("Solution for '" + mazeName + "' is ready");
 	}
 }

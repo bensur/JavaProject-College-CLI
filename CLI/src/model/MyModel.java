@@ -54,6 +54,11 @@ public class MyModel implements Model {
 	@Override
 	public void GenerateMaze(String mazeName, int floors, int rows, int columns, String alg) {
 		// TODO Auto-generated method stub
-//		Thread t = new Thread(new GenerateMaze());
+		//Thread t = new Thread(new GenerateMaze());
+	}
+	
+	public void SolveMaze(String mazeName, String alg) {
+		// TODO Auto-generated method stub
+		//Thread t = new Thread(new SolveMaze());
 	}
 }
