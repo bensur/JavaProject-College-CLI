@@ -38,12 +38,4 @@ public interface Controller {
 	 * @param string
 	 */
 	public void print(String string);
-	
-	/**
-	 * 
-	 * @param mazeName
-	 * @param generate
-	 */
-	public void addMaze(String mazeName, Maze3d maze);
-	public void addMazeSolution(String mazeName, Solution solution);
 }

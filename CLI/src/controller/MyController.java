@@ -17,8 +17,7 @@ import view.View;
 public class MyController implements Controller {
 	private View view;
 	private Model model;
-	private HashMap<String, Maze3d> mazes;
-	private HashMap<String, Solution> solutions;
+	
 
 	/**
 	 * @return the view
@@ -49,30 +48,10 @@ public class MyController implements Controller {
 	}
 	
 	/**
-	 * @return mazes HashMap
-	 */
-	public HashMap<String, Maze3d> getMazes() {
-		return mazes;
-	}
-	
-	/**
 	 * 
 	 */
 	@Override
 	public void print(String string) {
 		view.print(string);
-	}
-
-	@Override
-	public void addMaze(String mazeName, Maze3d maze) {
-		// TODO Auto-generated method stub
-		mazes.put(mazeName, maze);
-		print("Maze '" + mazeName + "' is ready");
-	}
-
-	@Override
-	public void addMazeSolution(String mazeName, Solution solution) {
-		solutions.put(mazeName, solution);
-		print("Solution for '" + mazeName + "' is ready");
 	}
 }
