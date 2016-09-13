@@ -17,7 +17,6 @@ import view.View;
 public class MyController implements Controller {
 	private View view;
 	private Model model;
-	
 
 	/**
 	 * @return the view
