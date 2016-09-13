@@ -37,6 +37,11 @@ public interface Model {
 	 */
 	public void GenerateMaze(String mazeName, int floors, int rows, int columns, String alg);
 	
+	/**
+	 * 
+	 * @param mazeName
+	 * @param alg
+	 */
 	public void SolveMaze(String mazeName, String alg);
 	
 	/**

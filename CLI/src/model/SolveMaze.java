@@ -4,17 +4,12 @@
 package model;
 
 import algorithms.search.BFS;
-import algorithms.search.CommonSearcher;
 import algorithms.search.DFS;
 import algorithms.search.SearchableMaze3d;
 import algorithms.search.Searcher;
 import controller.Controller;
-import mazeGenerators.algorithms.GrowingTreeGenerator;
-import mazeGenerators.algorithms.Maze3dGenerator;
+import mazeGenerators.algorithms.Maze3d;
 import mazeGenerators.algorithms.Position;
-import mazeGenerators.algorithms.SimpleMaze3dGenerator;
-import mazeGenerators.algorithms.lastCellChooser;
-import mazeGenerators.algorithms.randomCellChooser;
 
 /**
  * @author yschori
@@ -22,11 +17,13 @@ import mazeGenerators.algorithms.randomCellChooser;
  */
 public class SolveMaze implements Runnable {
 	private Controller controller;
+	private Maze3d maze;
 	private String mazeName;
 	private String alg;
 	
-	public SolveMaze(Controller controller, String mazeName, String alg) {
+	public SolveMaze(Controller controller, Maze3d maze, String mazeName, String alg) {
 		this.controller = controller;
+		this.maze = maze;
 		this.mazeName = mazeName;
 		this.alg = alg;
 	}
@@ -35,7 +32,7 @@ public class SolveMaze implements Runnable {
 	 */
 	@Override
 	public void run() {
-		Searcher search;
+		Searcher<Position> search;
 		switch (alg) {
 		case "BFS":
 			search = new BFS<Position>();
@@ -46,7 +43,7 @@ public class SolveMaze implements Runnable {
 		default:
 			throw new IllegalArgumentException("No such algorithm '" + alg + "'");
 		}
-		controller.addMazeSolution(mazeName, search.search(alg));
+		controller.addMazeSolution(mazeName, search.search(new SearchableMaze3d(maze)));
 
 	}
 

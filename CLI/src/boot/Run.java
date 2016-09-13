@@ -21,9 +21,11 @@ public class Run {
 	 */
 	public static void main(String[] args) {
 		Controller controller = new MyController();
-		View view = new MyView();
-		Model model = new MyModel();
+		View view = new MyView(controller);
+		Model model = new MyModel(controller);
 		
+		controller.setModel(model);
+		controller.setView(view);
 		view.start();
 	}
 

@@ -22,6 +22,11 @@ import mazeGenerators.algorithms.Maze3d;
 public class MyModel implements Model {
 	private Controller controller;
 
+	
+	public MyModel(Controller controller) {
+		this.controller = controller;
+	}
+	
 	/**
 	 * @return the controller
 	 */
@@ -56,42 +61,16 @@ public class MyModel implements Model {
 
 	@Override
 	public void GenerateMaze(String mazeName, int floors, int rows, int columns, String alg) {
-		// TODO Auto-generated method stub
-		//Thread t = new Thread(new GenerateMaze());
+		Thread t = new Thread(new GenerateMaze(mazeName, floors, rows, columns, alg, controller));
+		t.start(); //TODO thread pool
 	}
 	
 	public void SolveMaze(String mazeName, String alg) {
-		// TODO Auto-generated method stub
-		//Thread t = new Thread(new SolveMaze());
-		Thread t = new Thread(new GenerateMaze(mazeName, floors, rows, columns, alg, controller));
+		Maze3d maze;
+		Thread t = new Thread(new SolveMaze(controller, maze, mazeName, alg));
 		t.start(); //TODO thread pool
 	}
-
-	@Override
-	public void loadMaze(String mazeName, String fileName) {
-		InputStream in;
-		try {
-			in = new MyDecompressorInputStream(
-			new FileInputStream("1.maz"));
-			byte[] sizeArr = new byte[4];
-			for (int i = 0 ; i < sizeArr.length ; i++)
-				sizeArr[i] = (byte)in.read();
-			int size = ((sizeArr[0] * sizeArr[1]) + (sizeArr[2] * sizeArr[3]));
-			byte b[]=new byte[size];
-			in.read(b);
-			in.close();
-			controller.addMaze(mazeName, new Maze3d(b));
-		} catch (FileNotFoundException e) {
-			controller.print("Cannot access '" + fileName + "': No such file");
-			e.printStackTrace();
-		} catch (IOException e) {
-			controller.print("IOException occured while loading from '" + fileName +"'");
-			e.printStackTrace();
-		}
-		Thread t = new Thread(new GenerateMaze(mazeName, floors, rows, columns, alg, controller));
-		t.start(); //TODO thread pool
-	}
-
+	
 	@Override
 	public void loadMaze(String mazeName, String fileName) {
 		InputStream in;
