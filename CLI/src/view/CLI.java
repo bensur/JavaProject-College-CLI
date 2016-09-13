@@ -38,16 +38,23 @@ public class CLI {
 	    {
 	        public void run() {
 	        	try {
-	    			String option;
+	    			String cliInput;
 	    			do {
-	    				option = in.readLine();
-	    				if (commandsMap.containsKey(option)) {
-	    					commandsMap.get(option).doCommand();
+	    				cliInput = in.readLine();
+	    				String[] arr = cliInput.split(" ");
+	    				String command = arr[0];
+	    				if (commandsMap.containsKey(command)) {
+	    					String[] args = null;
+	    					if (arr.length > 1) {
+	    						String commandArgs = cliInput.substring(cliInput.indexOf(" ") + 1);
+	    						args = commandArgs.split(" ");
+	    					}
+	    					commandsMap.get(command).doCommand(args);
 	    				} else {
-	    					out.println(option + ": command not found");
+	    					out.println(command + ": command not found");
 	    				}
 	    				
-	    			} while (!option.equals("exit"));
+	    			} while (!cliInput.equals("exit"));
 	    			
 	    		} catch (IOException e) {
 	    			// TODO Auto-generated catch block

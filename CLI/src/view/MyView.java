@@ -6,12 +6,10 @@ package view;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.URI;
 import java.util.HashMap;
 
 import controller.Command;
 import controller.Controller;
-import controller.Dir;
 
 /**
  * @author yschori

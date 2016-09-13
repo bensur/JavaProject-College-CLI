@@ -5,8 +5,7 @@ package controller;
 
 import java.util.HashMap;
 
-import algorithms.search.Solution;
-import mazeGenerators.algorithms.Maze3d;
+import controller.CommandsManager.Dir;
 import model.Model;
 import view.View;
 
@@ -17,6 +16,14 @@ import view.View;
 public class MyController implements Controller {
 	private View view;
 	private Model model;
+	private HashMap<String, Command> commands;
+	
+	/**
+	 * 
+	 */
+	public MyController() {
+		
+	}
 	
 
 	/**
