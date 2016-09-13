@@ -66,4 +66,9 @@ public interface Model {
 	 * @param search
 	 */
 	public void addMazeSolution(String mazeName, Solution<Position> search);
+	
+	/**
+	 * 
+	 */
+	public void exit();
 }

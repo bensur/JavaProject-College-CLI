@@ -3,18 +3,13 @@
  */
 package model;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import algorithms.search.Solution;
 import controller.Controller;
-import io.MyCompressorOutputStream;
-import io.MyDecompressorInputStream;
 import mazeGenerators.algorithms.Maze3d;
 import mazeGenerators.algorithms.Position;
 
@@ -26,6 +21,7 @@ public class MyModel implements Model {
 	private Controller controller;
 	private HashMap<String, Maze3d> mazes = new HashMap<String, Maze3d>();
 	private HashMap<String, Solution<Position>> solutions = new HashMap<String, Solution<Position>>();
+	private ExecutorService executor = Executors.newCachedThreadPool();
 
 	public MyModel(Controller controller) {
 		this.controller = controller;
@@ -55,20 +51,17 @@ public class MyModel implements Model {
 
 	@Override
 	public void generateMaze(String mazeName, int floors, int rows, int columns, String alg) {
-		Thread t = new Thread(new GenerateMaze(mazeName, floors, rows, columns, alg, this));
-		t.start(); // TODO thread pool
+		executor.execute(new GenerateMaze(mazeName, floors, rows, columns, alg, this));
 	}
 	
 	@Override
 	public void saveMaze(String mazeName, String fileName){
-		Thread t = new Thread(new SaveMaze(mazeName, fileName, mazes, this, controller));
-		t.start(); //TODO thread pool
+		executor.execute(new SaveMaze(mazeName, fileName, mazes, this, controller));
 	}
 	
 	@Override
 	public void loadMaze(String mazeName, String fileName) {
-		Thread t = new Thread(new LoadMaze(mazeName, fileName, mazes, this, controller));
-		t.start(); //TODO thread pool
+		executor.execute(new LoadMaze(mazeName, fileName, mazes, this, controller));
 	}
 
 	@Override
@@ -76,8 +69,7 @@ public class MyModel implements Model {
 		if (!mazes.containsKey(mazeName)) {
 			controller.print("No such maze " + mazeName);
 		} else {
-			Thread t = new Thread(new SolveMaze(this, mazes.get(mazeName), mazeName, alg));
-			t.start(); // TODO thread pool
+			executor.execute(new SolveMaze(this, mazes.get(mazeName), mazeName, alg));
 		}
 	}
 
@@ -95,5 +87,13 @@ public class MyModel implements Model {
 			controller.print("Solution for maze " + mazeName + " already exist!");
 		else
 			solutions.put(mazeName, solution);
+	}
+	
+	public void exit() {
+		try {
+			executor.awaitTermination(60, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }
