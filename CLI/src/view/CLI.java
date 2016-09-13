@@ -14,7 +14,7 @@ import controller.Command;
  * @author bensu
  *
  */
-public class CLI extends Thread {
+public class CLI {
 	private BufferedReader in;
 	private PrintWriter out;
 	private HashMap<String, Command> commandsMap;
@@ -30,25 +30,33 @@ public class CLI extends Thread {
 	/* (non-Javadoc)
 	 * @see java.lang.Thread#start()
 	 */
-	@Override
+	
 	public void start() {
 		// TODO Auto-generated method stub
-		try {
-			String option;
-			do {
-				option = in.readLine();
-				if (commandsMap.containsKey(option)) {
-					commandsMap.get(option).doCommand();
-				} else {
-					out.println(option + ": command not found");
-				}
-				
-			} while (!option.equals("exit"));
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		Thread t = new Thread()
+	    {
+	        public void run() {
+	        	try {
+	    			String option;
+	    			do {
+	    				option = in.readLine();
+	    				if (commandsMap.containsKey(option)) {
+	    					commandsMap.get(option).doCommand();
+	    				} else {
+	    					out.println(option + ": command not found");
+	    				}
+	    				
+	    			} while (!option.equals("exit"));
+	    			
+	    		} catch (IOException e) {
+	    			// TODO Auto-generated catch block
+	    			e.printStackTrace();
+	    		}
+	        }
+	    }; 
+	    
+	    t.start();
 	}
 	
 	/**
