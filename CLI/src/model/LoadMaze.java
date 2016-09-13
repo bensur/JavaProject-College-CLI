@@ -3,9 +3,14 @@
  */
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 
 import controller.Controller;
+import io.MyDecompressorInputStream;
 import mazeGenerators.algorithms.Maze3d;
 
 /**
@@ -42,7 +47,24 @@ public class LoadMaze implements Runnable {
 		if (mazes.containsKey(mazeName))
 			controller.print("Maze '" + mazeName + "' already exist!");
 		else {
-			model.loadMaze(mazeName, fileName);
+			InputStream in;
+			try {
+				in = new MyDecompressorInputStream(new FileInputStream("1.maz"));
+				byte[] sizeArr = new byte[4];
+				for (int i = 0; i < sizeArr.length; i++)
+					sizeArr[i] = (byte) in.read();
+				int size = ((sizeArr[0] * sizeArr[1]) + (sizeArr[2] * sizeArr[3]));
+				byte b[] = new byte[size];
+				in.read(b);
+				in.close();
+				model.addMaze(mazeName, new Maze3d(b));
+			} catch (FileNotFoundException e) {
+				controller.print("Cannot access '" + fileName + "': No such file");
+				e.printStackTrace();
+			} catch (IOException e) {
+				controller.print("IOException occured while loading from '" + fileName + "'");
+				e.printStackTrace();
+			}
 		}
 	}
 

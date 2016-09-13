@@ -28,7 +28,7 @@ public interface Model {
 	 * @param mazeName
 	 * @param fileName
 	 */
-	public void saveMaze(Maze3d maze, String fileName);
+	public void saveMaze(String mazeName, String fileName);
 	
 	/**
 	 * 
@@ -37,14 +37,14 @@ public interface Model {
 	 * @param rows
 	 * @param columns
 	 */
-	public void GenerateMaze(String mazeName, int floors, int rows, int columns, String alg);
+	public void generateMaze(String mazeName, int floors, int rows, int columns, String alg);
 	
 	/**
 	 * 
 	 * @param mazeName
 	 * @param alg
 	 */
-	public void SolveMaze(String mazeName, String alg);
+	public void solveMaze(String mazeName, String alg);
 	
 	/**
 	 * 

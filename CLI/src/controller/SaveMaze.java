@@ -3,11 +3,7 @@
  */
 package controller;
 
-import java.util.HashMap;
-
-import mazeGenerators.algorithms.Maze3d;
 import model.Model;
-import view.View;
 
 /**
  * @author bensu
@@ -16,10 +12,7 @@ import view.View;
 public class SaveMaze implements Command {
 	private String mazeName;
 	private String fileName;
-	private HashMap<String, Maze3d> mazes;
 	private Model model;
-	private Controller controller;
-	
 	/**
 	 * C'tor
 	 * @param mazeName
@@ -28,19 +21,17 @@ public class SaveMaze implements Command {
 	 * @param model
 	 * @param controller
 	 */
-	public SaveMaze(String mazeName, String fileName, HashMap<String, Maze3d> mazes, Model model, Controller controller) {
+	public SaveMaze(String mazeName, String fileName, Model model, Controller controller) {
 		this.mazeName = mazeName;
 		this.fileName = fileName;
-		this.mazes = mazes;
 		this.model = model;
-		this.controller = controller;
 	}
 	/* (non-Javadoc)
 	 * @see controller.Command#doCommand()
 	 */
 	@Override
 	public void doCommand() {
-		model.saveMaze(mazes.get(mazeName), fileName);
+		model.saveMaze(mazeName, fileName);
 	}
 
 }

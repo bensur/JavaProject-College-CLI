@@ -3,9 +3,14 @@
  */
 package model;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 
 import controller.Controller;
+import io.MyCompressorOutputStream;
 import mazeGenerators.algorithms.Maze3d;
 
 /**
@@ -42,7 +47,19 @@ public class SaveMaze implements Runnable {
 		if (!mazes.containsKey(mazeName))
 			controller.print("No such maze " + mazeName);
 		else {
-			model.saveMaze(mazes.get(mazeName), fileName);
+			OutputStream out;
+			try {
+				out = new MyCompressorOutputStream(new FileOutputStream(fileName));
+				out.write(mazes.get(mazeName).toByteArray());
+				out.flush();
+				out.close();
+			} catch (FileNotFoundException e) {
+				controller.print("Cannot access '" + fileName + "': No such file");
+				e.printStackTrace();
+			} catch (IOException e) {
+				controller.print("IOException occured while saving to '" + fileName + "'");
+				e.printStackTrace();
+			}
 		}
 	}
 

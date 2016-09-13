@@ -38,7 +38,7 @@ public class GenerateMaze implements Command {
 	 */
 	@Override
 	public void doCommand() {
-		model.GenerateMaze(mazeName, floors, rows, columns, alg);
+		model.generateMaze(mazeName, floors, rows, columns, alg);
 	}
 
 }
