@@ -16,13 +16,13 @@ import mazeGenerators.algorithms.Position;
  *
  */
 public class SolveMaze implements Runnable {
-	private Controller controller;
+	private Model model;
 	private Maze3d maze;
 	private String mazeName;
 	private String alg;
 	
-	public SolveMaze(Controller controller, Maze3d maze, String mazeName, String alg) {
-		this.controller = controller;
+	public SolveMaze(Model model, Maze3d maze, String mazeName, String alg) {
+		this.model = model;
 		this.maze = maze;
 		this.mazeName = mazeName;
 		this.alg = alg;
@@ -43,7 +43,7 @@ public class SolveMaze implements Runnable {
 		default:
 			throw new IllegalArgumentException("No such algorithm '" + alg + "'");
 		}
-		controller.addMazeSolution(mazeName, search.search(new SearchableMaze3d(maze)));
+		model.addMazeSolution(mazeName, search.search(new SearchableMaze3d(maze)));
 
 	}
 

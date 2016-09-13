@@ -1,19 +1,18 @@
 /**
  * 
  */
-package controller;
+package model;
 
 import java.util.HashMap;
 
+import controller.Controller;
 import mazeGenerators.algorithms.Maze3d;
-import model.Model;
-import view.View;
 
 /**
- * @author bensu
+ * @author yschori
  *
  */
-public class SaveMaze implements Command {
+public class LoadMaze implements Runnable {
 	private String mazeName;
 	private String fileName;
 	private HashMap<String, Maze3d> mazes;
@@ -28,7 +27,7 @@ public class SaveMaze implements Command {
 	 * @param model
 	 * @param controller
 	 */
-	public SaveMaze(String mazeName, String fileName, HashMap<String, Maze3d> mazes, Model model, Controller controller) {
+	public LoadMaze(String mazeName, String fileName, HashMap<String, Maze3d> mazes, Model model, Controller controller) {
 		this.mazeName = mazeName;
 		this.fileName = fileName;
 		this.mazes = mazes;
@@ -36,11 +35,15 @@ public class SaveMaze implements Command {
 		this.controller = controller;
 	}
 	/* (non-Javadoc)
-	 * @see controller.Command#doCommand()
+	 * @see java.lang.Runnable#run()
 	 */
 	@Override
-	public void doCommand() {
-		model.saveMaze(mazes.get(mazeName), fileName);
+	public void run() {
+		if (mazes.containsKey(mazeName))
+			controller.print("Maze '" + mazeName + "' already exist!");
+		else {
+			model.loadMaze(mazeName, fileName);
+		}
 	}
 
 }

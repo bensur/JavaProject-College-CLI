@@ -20,7 +20,7 @@ public class GenerateMaze implements Runnable {
 	private int rows;
 	private int columns;
 	private String alg;
-	private Controller controller;
+	private Model model;
 	
 	/**
 	 * 
@@ -30,13 +30,13 @@ public class GenerateMaze implements Runnable {
 	 * @param columns
 	 * @param controller
 	 */
-	public GenerateMaze(String mazeName, int floors, int rows, int columns, String alg, Controller controller) {
+	public GenerateMaze(String mazeName, int floors, int rows, int columns, String alg, Model model) {
 		this.mazeName = mazeName;
 		this.floors = floors;
 		this.rows = rows;
 		this.columns = columns;
 		this.alg = alg;
-		this.controller = controller;
+		this.model = model;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Runnable#run()
@@ -58,7 +58,7 @@ public class GenerateMaze implements Runnable {
 		default:
 			throw new IllegalArgumentException("No such algorithm '" + alg + "'");
 		}
-		controller.addMaze(mazeName, gen.generate(rows, columns, floors));
+		model.addMaze(mazeName, gen.generate(rows, columns, floors));
 	}
 	
 }
