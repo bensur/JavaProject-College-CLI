@@ -3,6 +3,8 @@
  */
 package controller;
 
+import java.util.HashMap;
+
 import model.Model;
 import view.View;
 
@@ -30,6 +32,11 @@ public interface Controller {
 	 * @param model the model to set
 	 */
 	public void setModel(Model model);
+	
+	/**
+	 * 
+	 */
+	public HashMap<String, Command> getCommands();
 	
 	/**
 	 * 

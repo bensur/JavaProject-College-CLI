@@ -40,6 +40,7 @@ public class CLI {
 	        	try {
 	    			String cliInput;
 	    			do {
+	    				print("Please enter command");
 	    				cliInput = in.readLine();
 	    				String[] arr = cliInput.split(" ");
 	    				String command = arr[0];
@@ -51,7 +52,7 @@ public class CLI {
 	    					}
 	    					commandsMap.get(command).doCommand(args);
 	    				} else {
-	    					out.println(command + ": command not found");
+	    					print(command + ": command not found");
 	    				}
 	    				
 	    			} while (!cliInput.equals("exit"));
@@ -71,6 +72,6 @@ public class CLI {
 	 * @param s String to print
 	 */
 	public void print(String s) {
-		out.println(s);
+		System.out.println(s);
 	}
 }

@@ -17,16 +17,8 @@ import controller.Controller;
  */
 public class MyView implements View {
 	private Controller controller;
-	private CLI cli = new CLI(new BufferedReader(new InputStreamReader(System.in)), new PrintWriter(System.out), new HashMap<String, Command>());
-	
-	/**
-	 * C'tor
-	 * @param controller
-	 */
-	public MyView (Controller controller) {
-		this.controller = controller;
-	}
-	
+	private CLI cli;
+		
 	public void start() {
 		cli.start();
 	}
@@ -43,6 +35,7 @@ public class MyView implements View {
 	 */
 	public void setController(Controller controller) {
 		this.controller = controller;
+		this.cli = new CLI(new BufferedReader(new InputStreamReader(System.in)), new PrintWriter(System.out), controller.getCommands());
 	}
 	
 	/**

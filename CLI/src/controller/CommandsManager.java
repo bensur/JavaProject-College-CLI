@@ -39,8 +39,8 @@ public class CommandsManager {
 		HashMap<String, Command> commands = new HashMap<String, Command>();
 		commands.put("dir", new Dir());
 		commands.put("generate_maze", new GenerateMaze());
-		commands.put("display", new Display());
-		commands.put("display_cross_section", new DisplayCrossSection());
+		//commands.put("display", new Display());
+		//commands.put("display_cross_section", new DisplayCrossSection());
 		commands.put("save_maze", new SaveMaze());
 		commands.put("load_maze", new LoadMaze());
 		commands.put("solve", new SolveMaze());
@@ -61,7 +61,7 @@ public class CommandsManager {
 		 */
 		@Override
 		public void doCommand(String[] args) {
-			this.file = new File(args[1]);
+			this.file = new File(args[0]);
 			if(file.isDirectory()) {
 				filesList = file.list();
 				for (int i = 0; i < filesList.length; i++) {
@@ -97,7 +97,7 @@ public class CommandsManager {
 		 */
 		@Override
 		public void doCommand(String args[]) {
-			this.mazeName = args[1];
+			this.mazeName = args[0];
 			// Add error msg if no such mazeName
 			StringBuilder sb = new StringBuilder();
 			if (!mazes.containsKey(mazeName)) {
@@ -213,7 +213,7 @@ public class CommandsManager {
 		 */
 		@Override
 		public void doCommand(String args[]) {
-			this.mazeName = args[1];
+			this.mazeName = args[0];
 			Solution<Position> sol = new Solution<Position>();
 			if (solutions.containsKey(mazeName)) {
 				controller.print(sol.toString());
@@ -251,11 +251,11 @@ public class CommandsManager {
 		 */
 		@Override
 		public void doCommand(String args[]) {
-			this.mazeName = args[1];
-			this.floors = Integer.parseInt(args[2]);
-			this.rows = Integer.parseInt(args[3]);
-			this.columns = Integer.parseInt(args[4]);
-			this.alg = args[5];
+			this.mazeName = args[0];
+			this.floors = Integer.parseInt(args[1]);
+			this.rows = Integer.parseInt(args[2]);
+			this.columns = Integer.parseInt(args[3]);
+			this.alg = args[4];
 			model.generateMaze(mazeName, floors, rows, columns, alg);
 		}
 	}
@@ -271,8 +271,8 @@ public class CommandsManager {
 		 */
 		@Override
 		public void doCommand(String args[]) {
-			this.mazeName = args[1];
-			this.fileName = args[2];
+			this.mazeName = args[0];
+			this.fileName = args[1];
 			model.loadMaze(mazeName, fileName);
 		}
 	}
@@ -288,8 +288,8 @@ public class CommandsManager {
 		 */
 		@Override
 		public void doCommand(String args[]) {
-			this.mazeName = args[1];
-			this.fileName = args[2];
+			this.mazeName = args[0];
+			this.fileName = args[1];
 			model.saveMaze(mazeName, fileName);
 		}
 	}
@@ -306,8 +306,8 @@ public class CommandsManager {
 		 */
 		@Override
 		public void doCommand(String args[]) {
-			this.mazeName = args[1];
-			this.alg = args[2];
+			this.mazeName = args[0];
+			this.alg = args[1];
 			model.solveMaze(mazeName, alg);
 		}
 	}

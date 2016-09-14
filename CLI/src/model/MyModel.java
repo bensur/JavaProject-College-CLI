@@ -23,10 +23,6 @@ public class MyModel implements Model {
 	private HashMap<String, Solution<Position>> solutions = new HashMap<String, Solution<Position>>();
 	private ExecutorService executor = Executors.newCachedThreadPool();
 
-	public MyModel(Controller controller) {
-		this.controller = controller;
-	}
-
 	/**
 	 * @return the controller
 	 */

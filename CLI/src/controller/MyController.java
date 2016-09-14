@@ -3,51 +3,60 @@
  */
 package controller;
 
+import java.util.HashMap;
+
+import controller.CommandsManager.Dir;
 import model.Model;
 import view.View;
 
 /**
- * @author Ben Surkiss & Yovel Shchori
+ * @author yschori
  *
  */
 public class MyController implements Controller {
 	private View view;
 	private Model model;
-
-	/* (non-Javadoc)
-	 * @see controller.Controller#getView()
+	
+	public MyController(Model model, View view) {
+		this.model = model;
+		this.view = view;
+	}
+	
+	/**
+	 * @return the view
 	 */
-	@Override
 	public View getView() {
 		return view;
 	}
 
-	/* (non-Javadoc)
-	 * @see controller.Controller#setView(View view)
+	/**
+	 * @param view the view to set
 	 */
-	@Override
 	public void setView(View view) {
 		this.view = view;
 	}
 
-	/* (non-Javadoc)
-	 * @see controller.Controller#getModel(Model model)
+	/**
+	 * @return the model
 	 */
-	@Override
 	public Model getModel() {
 		return model;
 	}
 
-	/* (non-Javadoc)
-	 * @see controller.Controller#getModel(Model model)
+	/**
+	 * @param model the model to set
 	 */
-	@Override
 	public void setModel(Model model) {
 		this.model = model;
 	}
 	
-	/* (non-Javadoc)
-	 * @see controller.Controller#print(String string)
+	public HashMap<String, Command> getCommands() {
+		CommandsManager manager = new CommandsManager(model, view, this);
+		return manager.getCommands();
+	}
+	
+	/**
+	 * 
 	 */
 	@Override
 	public void print(String string) {

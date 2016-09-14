@@ -19,12 +19,13 @@ public class Run {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Controller controller = new MyController();
-		View view = new MyView(controller);
-		Model model = new MyModel(controller);
+		Model model = new MyModel();
+		View view = new MyView();
+		Controller controller = new MyController(model, view);
+
+		model.setController(controller);
+		view.setController(controller);
 		
-		controller.setModel(model);
-		controller.setView(view);
 		view.start();
 	}
 
