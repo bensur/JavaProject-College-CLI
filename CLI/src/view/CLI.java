@@ -12,14 +12,18 @@ import controller.Command;
 
 /**
  * @author bensu
- *
+ * 
  */
 public class CLI {
 	private BufferedReader in;
 	private PrintWriter out;
 	private HashMap<String, Command> commandsMap;
+	
 	/**
-	 * 
+	 * C'tor
+	 * @param in Input stream
+	 * @param out Output stream
+	 * @param commandsMap Commands map
 	 */
 	public CLI(BufferedReader in, PrintWriter out, HashMap<String, Command> commandsMap) {
 		this.in = in;
@@ -27,13 +31,10 @@ public class CLI {
 		this.commandsMap = commandsMap;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Thread#start()
+	/* 
+	 * 
 	 */
-	
-	public void start() {
-		// TODO Auto-generated method stub
-		
+	public void start() {		
 		Thread t = new Thread()
 	    {
 	        public void run() {
@@ -58,7 +59,6 @@ public class CLI {
 	    			} while (!cliInput.equals("exit"));
 	    			
 	    		} catch (IOException e) {
-	    			// TODO Auto-generated catch block
 	    			e.printStackTrace();
 	    		}
 	        }

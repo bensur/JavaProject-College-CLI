@@ -35,6 +35,7 @@ public interface Controller {
 	
 	/**
 	 * 
+	 * @return Commands map
 	 */
 	public HashMap<String, Command> getCommands();
 	
