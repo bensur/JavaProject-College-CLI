@@ -11,7 +11,7 @@ import view.MyView;
 import view.View;
 
 /**
- * @author yschori
+ * @author Ben Surkiss & Yovel Shchori
  *
  */
 public class Run {
@@ -23,9 +23,9 @@ public class Run {
 		Controller controller = new MyController();
 		View view = new MyView(controller);
 		Model model = new MyModel(controller);
+		
 		controller.setModel(model);
 		controller.setView(view);
-		
 		view.start();
 	}
 
