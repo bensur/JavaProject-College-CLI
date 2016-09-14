@@ -39,8 +39,8 @@ public class CommandsManager {
 		HashMap<String, Command> commands = new HashMap<String, Command>();
 		commands.put("dir", new Dir());
 		commands.put("generate_maze", new GenerateMaze());
-		//commands.put("display", new Display());
-		//commands.put("display_cross_section", new DisplayCrossSection());
+		commands.put("display", new Display());
+		commands.put("display_cross_section", new DisplayCrossSection());
 		commands.put("save_maze", new SaveMaze());
 		commands.put("load_maze", new LoadMaze());
 		commands.put("solve", new SolveMaze());
@@ -76,28 +76,17 @@ public class CommandsManager {
 	/**
 	 * 
 	 * @author Ben Surkiss & Yovel Shchori
-	 * TODO - Get maze from model not mazes hashmap
 	 */
 	public class Display implements Command {
-		private Controller controller;
 		private String mazeName;
-		private HashMap<String, Maze3d> mazes;
-		/**
-		 * C'tor
-		 * @param controller
-		 * @param view
-		 */
-		public Display(Controller controller, String mazeName, HashMap<String, Maze3d> mazes) {
-			this.controller = controller;
-			this.mazeName = mazeName;
-			this.mazes = mazes;
-		}
+		
 		/* (non-Javadoc)
 		 * @see controller.Command#doCommand()
 		 */
 		@Override
 		public void doCommand(String args[]) {
 			this.mazeName = args[0];
+			HashMap <String, Maze3d> mazes = model.getMazes();
 			// Add error msg if no such mazeName
 			StringBuilder sb = new StringBuilder();
 			if (!mazes.containsKey(mazeName)) {
@@ -113,54 +102,44 @@ public class CommandsManager {
 			controller.print(sb.toString());
 		}
 		/**
-		 * TODO - change pringln to sb.append
-		 * @param maze 2d int representation of maze //TODO change to Maze3d method
+		 * 
+		 * @param maze 2d int representation of maze //TODO - change to global function
 		 */
 		private String maze2dToString(int[][] maze) {
 			StringBuilder sb = new StringBuilder();
-			System.out.println("{");
+			sb.append("{\n");
 			for (int i = 0 ; i < (maze.length - 1) ; i++) {
-				System.out.print("\t{");
+				sb.append("\t{");
 				for (int j = 0 ; j < (maze[i].length - 1) ; j++)
-					System.out.print(maze[i][j] + ", ");
-				System.out.println(maze[i][maze[i].length - 1] + "},");
+					sb.append(maze[i][j] + ", ");
+				sb.append(maze[i][maze[i].length - 1] + "},\n");
 			}
-			System.out.print("\t{");
+			sb.append("\t{");
 			for (int i = 0 ; i < (maze[maze.length - 1].length - 1) ; i++)
-				System.out.print(maze[maze.length - 1][i] + ", ");
-			System.out.println(maze[maze.length - 1][maze[maze.length - 1].length - 1] + "}");
-			System.out.println("}");
+				sb.append(maze[maze.length - 1][i] + ", ");
+			sb.append(maze[maze.length - 1][maze[maze.length - 1].length - 1] + "}\n");
+			sb.append("}");
 			return sb.toString();
-		}	
+		}
 	}
 	/**
-	 * TODO - same as above TODO!
 	 * @author Ben Surkiss & Yovel Shchori
 	 *
 	 */
 	public class DisplayCrossSection implements Command {
-		private Controller controller;
 		private String mazeName;
 		private HashMap<String, Maze3d> mazes;
 		private char axis;
 		private int index;
-		/**
-		 * C'tor
-		 * @param controller
-		 * @param view
-		 */
-		public DisplayCrossSection(Controller controller, String mazeName, HashMap<String, Maze3d> mazes, char axis, int index) {
-			this.controller = controller;
-			this.mazeName = mazeName;
-			this.mazes = mazes;
-			this.axis = axis;
-			this.index = index;
-		}
 		/* (non-Javadoc)
 		 * @see controller.Command#doCommand()
 		 */
 		@Override
 		public void doCommand(String args[]) {
+			this.mazeName = args[0];
+			this.mazes = model.getMazes();
+			this.axis = (args[1]).toCharArray()[0];
+			this.index = Integer.parseInt(args[2]);
 			StringBuilder sb = new StringBuilder();
 			if (!mazes.containsKey(mazeName))
 				sb.append("No such maze " + mazeName);
@@ -180,23 +159,23 @@ public class CommandsManager {
 			controller.print(sb.toString());
 		}
 		/**
-		 * TODO - change pringln to sb.append
-		 * @param maze 2d int representation of maze //TODO change to Maze3d method
+		 * 
+		 * @param maze 2d int representation of maze //TODO - change to global function
 		 */
 		private String maze2dToString(int[][] maze) {
 			StringBuilder sb = new StringBuilder();
-			System.out.println("{");
+			sb.append("{\n");
 			for (int i = 0 ; i < (maze.length - 1) ; i++) {
-				System.out.print("\t{");
+				sb.append("\t{");
 				for (int j = 0 ; j < (maze[i].length - 1) ; j++)
-					System.out.print(maze[i][j] + ", ");
-				System.out.println(maze[i][maze[i].length - 1] + "},");
+					sb.append(maze[i][j] + ", ");
+				sb.append(maze[i][maze[i].length - 1] + "},\n");
 			}
-			System.out.print("\t{");
+			sb.append("\t{");
 			for (int i = 0 ; i < (maze[maze.length - 1].length - 1) ; i++)
-				System.out.print(maze[maze.length - 1][i] + ", ");
-			System.out.println(maze[maze.length - 1][maze[maze.length - 1].length - 1] + "}");
-			System.out.println("}");
+				sb.append(maze[maze.length - 1][i] + ", ");
+			sb.append(maze[maze.length - 1][maze[maze.length - 1].length - 1] + "}\n");
+			sb.append("}");
 			return sb.toString();
 		}
 	}
@@ -205,15 +184,15 @@ public class CommandsManager {
 	 * 
 	 */
 	public class DisplaySolution implements Command {
-		View view;
 		String mazeName;
-		HashMap<String, Solution<Position>> solutions; //TODO get from model
+		HashMap<String, Solution<Position>> solutions;
 		/* (non-Javadoc)
 		 * @see controller.Command#doCommand()
 		 */
 		@Override
 		public void doCommand(String args[]) {
 			this.mazeName = args[0];
+			this.solutions = model.getSolutions();
 			Solution<Position> sol = new Solution<Position>();
 			if (solutions.containsKey(mazeName)) {
 				controller.print(sol.toString());
