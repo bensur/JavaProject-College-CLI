@@ -3,7 +3,6 @@
  */
 package model;
 
-import controller.Controller;
 import mazeGenerators.algorithms.GrowingTreeGenerator;
 import mazeGenerators.algorithms.Maze3dGenerator;
 import mazeGenerators.algorithms.SimpleMaze3dGenerator;
@@ -11,7 +10,7 @@ import mazeGenerators.algorithms.lastCellChooser;
 import mazeGenerators.algorithms.randomCellChooser;
 
 /**
- * @author bensu
+ * @author Ben Surkiss & Yovel Shchori
  *
  */
 public class GenerateMaze implements Runnable {
@@ -23,12 +22,12 @@ public class GenerateMaze implements Runnable {
 	private Model model;
 	
 	/**
-	 * 
-	 * @param mazeName
-	 * @param floors
-	 * @param rows
-	 * @param columns
-	 * @param controller
+	 * C'tor
+	 * @param mazeName to save in mazes HashMap
+	 * @param floors to generate in maze
+	 * @param rows to generate in maze
+	 * @param columns to generate in maze
+	 * @param model to return maze to
 	 */
 	public GenerateMaze(String mazeName, int floors, int rows, int columns, String alg, Model model) {
 		this.mazeName = mazeName;
@@ -43,8 +42,8 @@ public class GenerateMaze implements Runnable {
 	 */
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		Maze3dGenerator gen;
+		// Choose algorithm based on given alg
 		switch (alg) {
 		case "GrowingTreeRand":
 			gen = new GrowingTreeGenerator(new randomCellChooser());
@@ -58,6 +57,7 @@ public class GenerateMaze implements Runnable {
 		default:
 			throw new IllegalArgumentException("No such algorithm '" + alg + "'");
 		}
+		// Generate maze and add to model
 		model.addMaze(mazeName, gen.generate(rows, columns, floors));
 	}
 	

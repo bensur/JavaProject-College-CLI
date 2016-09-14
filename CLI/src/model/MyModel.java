@@ -14,7 +14,7 @@ import mazeGenerators.algorithms.Maze3d;
 import mazeGenerators.algorithms.Position;
 
 /**
- * @author yschori
+ * @author Ben Surkiss & Yovel Shchori
  *
  */
 public class MyModel implements Model {
@@ -22,42 +22,44 @@ public class MyModel implements Model {
 	private HashMap<String, Maze3d> mazes = new HashMap<String, Maze3d>();
 	private HashMap<String, Solution<Position>> solutions = new HashMap<String, Solution<Position>>();
 	private ExecutorService executor = Executors.newCachedThreadPool();
-
-	/**
-	 * @return the controller
+	/* (non-Javadoc)
+	 * @see model.Model#getController()
 	 */
 	@Override
 	public Controller getController() {
 		return controller;
 	}
-
-	/**
-	 * @param controller
-	 *            the controller to set
+	/* (non-Javadoc)
+	 * @see model.Model#setController(Controller controller)
 	 */
 	@Override
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
-
-	/**
-	 * @return mazes HashMap
+	/* (non-Javadoc)
+	 * @see model.Model#getMazesr()
 	 */
 	@Override
 	public HashMap<String, Maze3d> getMazes() {
 		return this.mazes;
 	}
-	
+	/* (non-Javadoc)
+	 * @see model.Model#getSolutions()
+	 */
 	@Override
 	public HashMap<String, Solution<Position>> getSolutions() {
 		return this.solutions;
 	}
-	
+	/* (non-Javadoc)
+	 * @see model.Model#generateMaze()
+	 */
 	@Override
 	public void generateMaze(String mazeName, int floors, int rows, int columns, String alg) {
 		executor.execute(new GenerateMaze(mazeName, floors, rows, columns, alg, this));
 	}
-	
+	/* (non-Javadoc)
+	 * @see model.Model#saveMaze()
+	 */
 	@Override
 	public void saveMaze(String mazeName, String fileName){
 		executor.execute(new SaveMaze(mazeName, fileName, mazes, this, controller));

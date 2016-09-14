@@ -74,7 +74,6 @@ public class CommandsManager {
 		}
 	}
 	/**
-	 * 
 	 * @author Ben Surkiss & Yovel Shchori
 	 */
 	public class Display implements Command {
@@ -102,7 +101,6 @@ public class CommandsManager {
 			controller.print(sb.toString());
 		}
 		/**
-		 * 
 		 * @param maze 2d int representation of maze //TODO - change to global function
 		 */
 		private String maze2dToString(int[][] maze) {
@@ -124,7 +122,6 @@ public class CommandsManager {
 	}
 	/**
 	 * @author Ben Surkiss & Yovel Shchori
-	 *
 	 */
 	public class DisplayCrossSection implements Command {
 		private String mazeName;

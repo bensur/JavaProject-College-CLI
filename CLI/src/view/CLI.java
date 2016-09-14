@@ -11,7 +11,7 @@ import java.util.HashMap;
 import controller.Command;
 
 /**
- * @author bensu
+ * @author Ben Surkiss & Yovel Shchori
  * 
  */
 public class CLI {
@@ -32,21 +32,26 @@ public class CLI {
 	}
 
 	/* 
-	 * 
+	 * Start the CLI in separate thread
 	 */
-	public void start() {		
+	public void start() {
+		// Creates new thread using anonymous
 		Thread t = new Thread()
 	    {
 	        public void run() {
 	        	try {
 	    			String cliInput;
+	    			// Run as long as user did not entered 'exit'
 	    			do {
 	    				print("Please enter command");
 	    				cliInput = in.readLine();
+	    				// Split user input by ' '
 	    				String[] arr = cliInput.split(" ");
+	    				// Set commands as first argument
 	    				String command = arr[0];
 	    				if (commandsMap.containsKey(command)) {
 	    					String[] args = null;
+	    					// If there are more strings after the command, assemble argument array from strings
 	    					if (arr.length > 1) {
 	    						String commandArgs = cliInput.substring(cliInput.indexOf(" ") + 1);
 	    						args = commandArgs.split(" ");
@@ -55,20 +60,18 @@ public class CLI {
 	    				} else {
 	    					print(command + ": command not found");
 	    				}
-	    				
 	    			} while (!cliInput.equals("exit"));
-	    			
 	    		} catch (IOException e) {
 	    			e.printStackTrace();
 	    		}
 	        }
 	    }; 
-	    
+	    // Start the thread
 	    t.start();
 	}
 	
 	/**
-	 * 
+	 * TODO use out var
 	 * @param s String to print
 	 */
 	public void print(String s) {

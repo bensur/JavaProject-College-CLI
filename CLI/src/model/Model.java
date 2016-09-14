@@ -11,7 +11,7 @@ import mazeGenerators.algorithms.Maze3d;
 import mazeGenerators.algorithms.Position;
 
 /**
- * @author yschori
+ * @author Ben Surkiss & Yovel Shchori
  *
  */
 public interface Model {
@@ -21,68 +21,68 @@ public interface Model {
 	public Controller getController();
 
 	/**
-	 * @param controller the controller to set
+	 * @param controller to set
 	 */
 	public void setController(Controller controller);
 	
 	/**
-	 * 
-	 * @param mazeName
-	 * @param fileName
+	 * Save maze to file
+	 * @param mazeName to save
+	 * @param fileName to save to
 	 */
 	public void saveMaze(String mazeName, String fileName);
 	
 	/**
-	 * 
-	 * @param mazeName
-	 * @param floors
-	 * @param rows
-	 * @param columns
+	 * Generate new maze
+	 * @param mazeName to set
+	 * @param floors to generate
+	 * @param rows to generate
+	 * @param columns to generate
 	 */
 	public void generateMaze(String mazeName, int floors, int rows, int columns, String alg);
 	
 	/**
-	 * 
-	 * @param mazeName
-	 * @param alg
+	 * Solve maze
+	 * @param mazeName to solve
+	 * @param alg to use
 	 */
 	public void solveMaze(String mazeName, String alg);
 	
 	/**
-	 * 
-	 * @param mazeName
-	 * @param fileName
+	 * Load maze
+	 * @param mazeName to load
+	 * @param fileName to load from
 	 */
 	public void loadMaze(String mazeName, String fileName);
 	
 	/**
-	 * 
-	 * @param mazeName
-	 * @param generate
+	 * Add maze to mazes HashMap
+	 * @param mazeName to add
+	 * @param maze to add
 	 */
-	public void addMaze(String mazeName, Maze3d generate);
+	public void addMaze(String mazeName, Maze3d maze);
 
 	/**
-	 * 
-	 * @param mazeName
-	 * @param search
+	 * Add maze solution to solutions HashMap
+	 * @param mazeName to add
+	 * @param solution to add
 	 */
-	public void addMazeSolution(String mazeName, Solution<Position> search);
+	public void addMazeSolution(String mazeName, Solution<Position> solution);
 	
 	/**
-	 * 
+	 * Exit from all threads
 	 */
 	public void exit();
 	
 	/**
-	 * 
-	 * @return mazes
+	 * Return mazes HashMap
+	 * @return mazes HashMap
 	 */
 	public HashMap<String, Maze3d> getMazes();
 	
 	/**
-	 * 
-	 * @return solutions
+	 * Return solutions HashMap
+	 * @return solutions HashMap
 	 */
 	HashMap<String, Solution<Position>> getSolutions();
 }

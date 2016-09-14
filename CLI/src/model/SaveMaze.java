@@ -14,7 +14,7 @@ import io.MyCompressorOutputStream;
 import mazeGenerators.algorithms.Maze3d;
 
 /**
- * @author yschori
+ * @author Ben Surkiss & Yovel Shchori
  *
  */
 public class SaveMaze implements Runnable {
@@ -25,11 +25,11 @@ public class SaveMaze implements Runnable {
 	
 	/**
 	 * C'tor
-	 * @param mazeName
-	 * @param fileName
-	 * @param mazes
-	 * @param model
-	 * @param controller
+	 * @param mazeName to save
+	 * @param fileName to save to
+	 * @param mazes to get maze from
+	 * @param model to use
+	 * @param controller to use
 	 */
 	public SaveMaze(String mazeName, String fileName, HashMap<String, Maze3d> mazes, Model model, Controller controller) {
 		this.mazeName = mazeName;
@@ -60,5 +60,4 @@ public class SaveMaze implements Runnable {
 			}
 		}
 	}
-
 }

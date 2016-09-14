@@ -14,7 +14,7 @@ import io.MyDecompressorInputStream;
 import mazeGenerators.algorithms.Maze3d;
 
 /**
- * @author yschori
+ * @author Ben Surkiss & Yovel Shchori
  *
  */
 public class LoadMaze implements Runnable {
@@ -26,11 +26,11 @@ public class LoadMaze implements Runnable {
 	
 	/**
 	 * C'tor
-	 * @param mazeName
-	 * @param fileName
-	 * @param mazes
-	 * @param model
-	 * @param controller
+	 * @param mazeName to add to mazes
+	 * @param fileName to load from
+	 * @param mazes HashMap of mazes to add the loaded maze to
+	 * @param model to use
+	 * @param controller to use
 	 */
 	public LoadMaze(String mazeName, String fileName, HashMap<String, Maze3d> mazes, Model model, Controller controller) {
 		this.mazeName = mazeName;
@@ -67,5 +67,4 @@ public class LoadMaze implements Runnable {
 			}
 		}
 	}
-
 }
