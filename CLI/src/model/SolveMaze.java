@@ -12,7 +12,7 @@ import mazeGenerators.algorithms.Maze3d;
 import mazeGenerators.algorithms.Position;
 
 /**
- * @author yschori
+ * @author Ben Surkiss & Yovel Shchori
  *
  */
 public class SolveMaze implements Runnable {
@@ -21,6 +21,13 @@ public class SolveMaze implements Runnable {
 	private String mazeName;
 	private String alg;
 	
+	/**
+	 * c'tor
+	 * @param model model to set
+	 * @param maze maze to set
+	 * @param mazeName mazeName to set
+	 * @param alg alg to set
+	 */
 	public SolveMaze(Model model, Maze3d maze, String mazeName, String alg) {
 		this.model = model;
 		this.maze = maze;

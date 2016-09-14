@@ -32,7 +32,7 @@ public class CommandsManager {
 		this.controller = controller;
 	}
 	/**
-	 * 
+	 * gets the commands map
 	 * @return commands HashMap
 	 */
 	public HashMap<String, Command> getCommands() {
@@ -49,9 +49,8 @@ public class CommandsManager {
 		return commands;
 	}
 	/**
-	 * 
 	 * @author Ben Surkiss & Yovel Shchori
-	 *
+	 * dir command, displays the folders and files in the given directory
 	 */
 	public class Dir implements Command {
 		private File file;
@@ -74,8 +73,8 @@ public class CommandsManager {
 		}
 	}
 	/**
-	 * 
 	 * @author Ben Surkiss & Yovel Shchori
+	 * display command, display the maze of the given maze name
 	 */
 	public class Display implements Command {
 		private String mazeName;
@@ -102,7 +101,7 @@ public class CommandsManager {
 			controller.print(sb.toString());
 		}
 		/**
-		 * 
+		 * representation of maze2d
 		 * @param maze 2d int representation of maze //TODO - change to global function
 		 */
 		private String maze2dToString(int[][] maze) {
@@ -124,7 +123,7 @@ public class CommandsManager {
 	}
 	/**
 	 * @author Ben Surkiss & Yovel Shchori
-	 *
+	 * display_cross_section command, displays the cross section maze of the given maze name, axis and index
 	 */
 	public class DisplayCrossSection implements Command {
 		private String mazeName;
@@ -181,7 +180,7 @@ public class CommandsManager {
 	}
 	/**
 	 * @author Ben Surkiss & Yovel Shchori
-	 * 
+	 * display_solution command, displays the solution of the maze of the given maze name
 	 */
 	public class DisplaySolution implements Command {
 		String mazeName;
@@ -204,7 +203,7 @@ public class CommandsManager {
 	}
 	/**
 	 * @author Ben Surkiss & Yovel Shchori
-	 *
+	 * exit command, exits the cli
 	 */
 	public class Exit implements Command {
 		/* (non-Javadoc)
@@ -217,7 +216,7 @@ public class CommandsManager {
 	}
 	/**
 	 * @author Ben Surkiss & Yovel Shchori
-	 *
+	 * generate_maze command, generates a maze with the given maze name, floors number, rows number, columns number and a generating algorithm
 	 */
 	public class GenerateMaze implements Command {
 		private String mazeName;
@@ -240,7 +239,7 @@ public class CommandsManager {
 	}
 	/**
 	 * @author Ben Surkiss & Yovel Shchori
-	 *
+	 * load_maze command, loads a saved and compressed maze of the given maze name into a given file name
 	 */
 	public class LoadMaze implements Command {
 		private String mazeName;
@@ -257,7 +256,7 @@ public class CommandsManager {
 	}
 	/**
 	 * @author Ben Surkiss & Yovel Shchori
-	 *
+	 * save_maze command, compresses and saves a maze of the given maze name into a given file name
 	 */
 	public class SaveMaze implements Command {
 		private String mazeName;
@@ -274,7 +273,7 @@ public class CommandsManager {
 	}
 	/**
 	 * @author Ben Surkiss & Yovel Shchori
-	 *
+	 * solve command, solves the maze of the given maze name using the given algorithm
 	 */
 	public class SolveMaze implements Command {
 		private String mazeName;
