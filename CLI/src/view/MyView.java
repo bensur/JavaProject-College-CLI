@@ -12,13 +12,16 @@ import controller.Command;
 import controller.Controller;
 
 /**
- * @author yschori
+ * @author Ben Surkiss & Yovel Shchori
  *
  */
 public class MyView implements View {
 	private Controller controller;
 	private CLI cli;
-		
+	
+	/**
+	 * start method from the view, calls the start method of the cli
+	 */
 	public void start() {
 		cli.start();
 	}
@@ -31,6 +34,7 @@ public class MyView implements View {
 	}
 
 	/**
+	 * set the controller and the cli with in, out and the commands map
 	 * @param controller the controller to set
 	 */
 	public void setController(Controller controller) {
@@ -39,7 +43,7 @@ public class MyView implements View {
 	}
 	
 	/**
-	 * 
+	 * print data from the view
 	 * @param s String to print
 	 */
 	public void print(String s) {

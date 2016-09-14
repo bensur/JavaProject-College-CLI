@@ -10,13 +10,18 @@ import model.Model;
 import view.View;
 
 /**
- * @author yschori
+ * @author Ben Surkiss & Yovel Shchori
  *
  */
 public class MyController implements Controller {
 	private View view;
 	private Model model;
 	
+	/**
+	 * c'tor
+	 * @param model model to set
+	 * @param view view to set
+	 */
 	public MyController(Model model, View view) {
 		this.model = model;
 		this.view = view;
@@ -50,6 +55,10 @@ public class MyController implements Controller {
 		this.model = model;
 	}
 	
+	/**
+	 * gets the commands map
+	 * @return commands map
+	 */
 	public HashMap<String, Command> getCommands() {
 		CommandsManager manager = new CommandsManager(model, view, this);
 		return manager.getCommands();

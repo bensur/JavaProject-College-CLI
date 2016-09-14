@@ -6,7 +6,7 @@ package view;
 import controller.Controller;
 
 /**
- * @author yschori
+ * @author Ben Surkiss & Yovel Shchori
  *
  */
 public interface View {
@@ -20,10 +20,13 @@ public interface View {
 	 */
 	public void setController(Controller controller);
 	
+	/**
+	 * start method from the view
+	 */
 	public void start();
 	
 	/**
-	 * 
+	 * start method from the view
 	 * @param s String to print
 	 */
 	public void print(String s);
