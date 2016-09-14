@@ -15,7 +15,6 @@ import view.View;
  *
  */
 public class Run {
-
 	/**
 	 * @param args
 	 */

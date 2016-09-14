@@ -3,13 +3,11 @@
  */
 package controller;
 
-import algorithms.search.Solution;
-import mazeGenerators.algorithms.Maze3d;
 import model.Model;
 import view.View;
 
 /**
- * @author yschori
+ * @author Ben Surkiss & Yovel Shchori
  *
  */
 public interface Controller {
@@ -35,7 +33,7 @@ public interface Controller {
 	
 	/**
 	 * 
-	 * @param string
+	 * @param string to print
 	 */
 	public void print(String string);
 }
