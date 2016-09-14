@@ -3,6 +3,8 @@
  */
 package model;
 
+import java.util.HashMap;
+
 import algorithms.search.Solution;
 import controller.Controller;
 import mazeGenerators.algorithms.Maze3d;
@@ -71,4 +73,16 @@ public interface Model {
 	 * 
 	 */
 	public void exit();
+	
+	/**
+	 * 
+	 * @return mazes
+	 */
+	public HashMap<String, Maze3d> getMazes();
+	
+	/**
+	 * 
+	 * @return solutions
+	 */
+	HashMap<String, Solution<Position>> getSolutions();
 }

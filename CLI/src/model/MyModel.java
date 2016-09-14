@@ -30,6 +30,7 @@ public class MyModel implements Model {
 	/**
 	 * @return the controller
 	 */
+	@Override
 	public Controller getController() {
 		return controller;
 	}
@@ -38,6 +39,7 @@ public class MyModel implements Model {
 	 * @param controller
 	 *            the controller to set
 	 */
+	@Override
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
@@ -45,10 +47,16 @@ public class MyModel implements Model {
 	/**
 	 * @return mazes HashMap
 	 */
+	@Override
 	public HashMap<String, Maze3d> getMazes() {
-		return mazes;
+		return this.mazes;
 	}
-
+	
+	@Override
+	public HashMap<String, Solution<Position>> getSolutions() {
+		return this.solutions;
+	}
+	
 	@Override
 	public void generateMaze(String mazeName, int floors, int rows, int columns, String alg) {
 		executor.execute(new GenerateMaze(mazeName, floors, rows, columns, alg, this));
@@ -72,7 +80,7 @@ public class MyModel implements Model {
 			executor.execute(new SolveMaze(this, mazes.get(mazeName), mazeName, alg));
 		}
 	}
-
+	
 	@Override
 	public void addMaze(String mazeName, Maze3d maze) {
 		if (mazes.containsKey(mazeName))
@@ -89,6 +97,7 @@ public class MyModel implements Model {
 			solutions.put(mazeName, solution);
 	}
 	
+	@Override
 	public void exit() {
 		try {
 			executor.awaitTermination(60, TimeUnit.SECONDS);
