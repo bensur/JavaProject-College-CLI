@@ -4,7 +4,7 @@
 package controller;
 
 /**
- * @author bensu
+ * @author Ben Surkiss & Yovel Shchori
  *
  */
 public interface Command {

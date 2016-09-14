@@ -11,11 +11,10 @@ import view.MyView;
 import view.View;
 
 /**
- * @author yschori
+ * @author Ben Surkiss & Yovel Shchori
  *
  */
 public class Run {
-
 	/**
 	 * @param args
 	 */
