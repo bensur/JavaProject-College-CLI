@@ -21,7 +21,6 @@ public class SaveMaze implements Runnable {
 	private String mazeName;
 	private String fileName;
 	private HashMap<String, Maze3d> mazes;
-	private Model model;
 	private Controller controller;
 	
 	/**
@@ -36,7 +35,6 @@ public class SaveMaze implements Runnable {
 		this.mazeName = mazeName;
 		this.fileName = fileName;
 		this.mazes = mazes;
-		this.model = model;
 		this.controller = controller;
 	}
 	/* (non-Javadoc)

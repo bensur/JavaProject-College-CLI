@@ -193,7 +193,7 @@ public class CommandsManager {
 		public void doCommand(String args[]) {
 			this.mazeName = args[0];
 			this.solutions = model.getSolutions();
-			Solution<Position> sol = new Solution<Position>();
+			Solution<Position> sol = solutions.get(mazeName);
 			if (solutions.containsKey(mazeName)) {
 				controller.print(sol.toString());
 			}

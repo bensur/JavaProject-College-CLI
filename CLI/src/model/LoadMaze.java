@@ -49,7 +49,7 @@ public class LoadMaze implements Runnable {
 		else {
 			InputStream in;
 			try {
-				in = new MyDecompressorInputStream(new FileInputStream("1.maz"));
+				in = new MyDecompressorInputStream(new FileInputStream(fileName));
 				byte[] sizeArr = new byte[4];
 				for (int i = 0; i < sizeArr.length; i++)
 					sizeArr[i] = (byte) in.read();
