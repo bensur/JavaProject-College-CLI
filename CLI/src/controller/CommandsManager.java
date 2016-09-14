@@ -13,14 +13,13 @@ import model.Model;
 import view.View;
 
 /**
- * @author bensu
+ * @author Ben Surkiss & Yovel Shchori
  *
  */
 public class CommandsManager {
 	protected Model model;
 	protected View view;
 	protected Controller controller;
-	
 	/**
 	 * 
 	 * @param model
@@ -32,7 +31,10 @@ public class CommandsManager {
 		this.view = view;
 		this.controller = controller;
 	}
-	
+	/**
+	 * 
+	 * @return commands HashMap
+	 */
 	public HashMap<String, Command> getCommands() {
 		HashMap<String, Command> commands = new HashMap<String, Command>();
 		commands.put("dir", new Dir());
@@ -46,16 +48,14 @@ public class CommandsManager {
 		commands.put("exit", new Exit());
 		return commands;
 	}
-	
 	/**
 	 * 
-	 * @author bensu
+	 * @author Ben Surkiss & Yovel Shchori
 	 *
 	 */
 	public class Dir implements Command {
 		private File file;
 		private String[] filesList;
-
 		/* (non-Javadoc)
 		 * @see controller.Command#doCommand()
 		 */
@@ -72,18 +72,16 @@ public class CommandsManager {
 				controller.print("Not a directory");
 			}
 		}
-
 	}
 	/**
 	 * 
-	 * @author bensu
+	 * @author Ben Surkiss & Yovel Shchori
 	 * TODO - Get maze from model not mazes hashmap
 	 */
 	public class Display implements Command {
 		private Controller controller;
 		private String mazeName;
 		private HashMap<String, Maze3d> mazes;
-		
 		/**
 		 * C'tor
 		 * @param controller
@@ -94,7 +92,6 @@ public class CommandsManager {
 			this.mazeName = mazeName;
 			this.mazes = mazes;
 		}
-		
 		/* (non-Javadoc)
 		 * @see controller.Command#doCommand()
 		 */
@@ -112,12 +109,11 @@ public class CommandsManager {
 				}
 				sb.append(maze2dToString(maze.getCrossSectionByZ(maze.getFlos() -1)));
 			}
-			// Print using view pring method
+			// Print using controller print method
 			controller.print(sb.toString());
 		}
-		
 		/**
-		 * 
+		 * TODO - change pringln to sb.append
 		 * @param maze 2d int representation of maze //TODO change to Maze3d method
 		 */
 		private String maze2dToString(int[][] maze) {
@@ -138,8 +134,8 @@ public class CommandsManager {
 		}	
 	}
 	/**
-	 * TODO - same as above todo!
-	 * @author bensu
+	 * TODO - same as above TODO!
+	 * @author Ben Surkiss & Yovel Shchori
 	 *
 	 */
 	public class DisplayCrossSection implements Command {
@@ -148,7 +144,6 @@ public class CommandsManager {
 		private HashMap<String, Maze3d> mazes;
 		private char axis;
 		private int index;
-		
 		/**
 		 * C'tor
 		 * @param controller
@@ -184,9 +179,8 @@ public class CommandsManager {
 			}
 			controller.print(sb.toString());
 		}
-		
 		/**
-		 * 
+		 * TODO - change pringln to sb.append
 		 * @param maze 2d int representation of maze //TODO change to Maze3d method
 		 */
 		private String maze2dToString(int[][] maze) {
@@ -206,16 +200,14 @@ public class CommandsManager {
 			return sb.toString();
 		}
 	}
-	
 	/**
-	 * @author yschori
+	 * @author Ben Surkiss & Yovel Shchori
 	 * 
 	 */
 	public class DisplaySolution implements Command {
 		View view;
 		String mazeName;
 		HashMap<String, Solution<Position>> solutions; //TODO get from model
-				
 		/* (non-Javadoc)
 		 * @see controller.Command#doCommand()
 		 */
@@ -224,21 +216,18 @@ public class CommandsManager {
 			this.mazeName = args[1];
 			Solution<Position> sol = new Solution<Position>();
 			if (solutions.containsKey(mazeName)) {
-				view.print(sol.toString());
+				controller.print(sol.toString());
 			}
 			else {
-				view.print("No solution found for maze " + mazeName);
+				controller.print("No solution found for maze " + mazeName);
 			}
 		}
-
 	}
-	
 	/**
-	 * @author yschori
+	 * @author Ben Surkiss & Yovel Shchori
 	 *
 	 */
 	public class Exit implements Command {
-		
 		/* (non-Javadoc)
 		 * @see controller.Command#doCommand()
 		 */
@@ -246,11 +235,9 @@ public class CommandsManager {
 		public void doCommand(String args[]) {
 			model.exit();
 		}
-
 	}
-	
 	/**
-	 * @author bensu
+	 * @author Ben Surkiss & Yovel Shchori
 	 *
 	 */
 	public class GenerateMaze implements Command {
@@ -259,7 +246,6 @@ public class CommandsManager {
 		private int rows;
 		private int columns;
 		private String alg;
-		
 		/* (non-Javadoc)
 		 * @see controller.Command#doCommand()
 		 */
@@ -273,15 +259,13 @@ public class CommandsManager {
 			model.generateMaze(mazeName, floors, rows, columns, alg);
 		}
 	}
-	
 	/**
-	 * @author bensu
+	 * @author Ben Surkiss & Yovel Shchori
 	 *
 	 */
 	public class LoadMaze implements Command {
 		private String mazeName;
 		private String fileName;
-		
 		/* (non-Javadoc)
 		 * @see controller.Command#doCommand()
 		 */
@@ -291,17 +275,14 @@ public class CommandsManager {
 			this.fileName = args[2];
 			model.loadMaze(mazeName, fileName);
 		}
-
 	}
-	
 	/**
-	 * @author bensu
+	 * @author Ben Surkiss & Yovel Shchori
 	 *
 	 */
 	public class SaveMaze implements Command {
 		private String mazeName;
 		private String fileName;
-		
 		/* (non-Javadoc)
 		 * @see controller.Command#doCommand()
 		 */
@@ -312,9 +293,8 @@ public class CommandsManager {
 			model.saveMaze(mazeName, fileName);
 		}
 	}
-	
 	/**
-	 * @author yschori
+	 * @author Ben Surkiss & Yovel Shchori
 	 *
 	 */
 	public class SolveMaze implements Command {
@@ -330,7 +310,5 @@ public class CommandsManager {
 			this.alg = args[2];
 			model.solveMaze(mazeName, alg);
 		}
-		
 	}
-
 }
