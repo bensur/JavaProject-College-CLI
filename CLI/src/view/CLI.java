@@ -71,10 +71,11 @@ public class CLI {
 	}
 	
 	/**
-	 * TODO use out var
+	 * Print using out object
 	 * @param s String to print
 	 */
 	public void print(String s) {
-		System.out.println(s);
+		out.println(s);
+		out.flush();
 	}
 }

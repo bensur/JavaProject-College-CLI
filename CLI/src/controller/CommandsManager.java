@@ -60,15 +60,19 @@ public class CommandsManager {
 		 */
 		@Override
 		public void doCommand(String[] args) {
-			this.file = new File(args[0]);
-			if(file.isDirectory()) {
-				filesList = file.list();
-				for (int i = 0; i < filesList.length; i++) {
-					controller.print(filesList[i]);
-				}
-			}
+			if ((args == null) || (args.length != 1))
+				controller.print("dir command need 1 argument:\ndir <PATH>");
 			else {
-				controller.print("Not a directory");
+				this.file = new File(args[0]);
+				if(file.isDirectory()) {
+					filesList = file.list();
+					for (int i = 0; i < filesList.length; i++) {
+						controller.print(filesList[i]);
+					}
+				}
+				else {
+					controller.print("Not a directory");
+				}
 			}
 		}
 	}
@@ -84,40 +88,25 @@ public class CommandsManager {
 		 */
 		@Override
 		public void doCommand(String args[]) {
-			this.mazeName = args[0];
-			HashMap <String, Maze3d> mazes = model.getMazes();
-			// Add error msg if no such mazeName
-			StringBuilder sb = new StringBuilder();
-			if (!mazes.containsKey(mazeName)) {
-				sb.append("No such maze " + mazeName);
-			} else { // Convert maze to string
-				Maze3d maze = mazes.get(mazeName);
-				for (int z = 0 ; z < maze.getFlos() -1 ; z++) {
-					sb.append(maze2dToString(maze.getCrossSectionByZ(z)) + "\n");
+			if ((args == null) || (args.length != 1))
+				controller.print("display command need 1 argument:\ndisplay <MAZE_NAME>");
+			else {
+				this.mazeName = args[0];
+				HashMap <String, Maze3d> mazes = model.getMazes();
+				// Add error msg if no such mazeName
+				StringBuilder sb = new StringBuilder();
+				if (!mazes.containsKey(mazeName)) {
+					sb.append("No such maze " + mazeName);
+				} else { // Convert maze to string
+					Maze3d maze = mazes.get(mazeName);
+					for (int z = 0 ; z < maze.getFlos() -1 ; z++) {
+						sb.append(maze2dToString(maze.getCrossSectionByZ(z)) + "\n");
+					}
+					sb.append(maze2dToString(maze.getCrossSectionByZ(maze.getFlos() -1)));
 				}
-				sb.append(maze2dToString(maze.getCrossSectionByZ(maze.getFlos() -1)));
+				// Print using controller print method
+				controller.print(sb.toString());
 			}
-			// Print using controller print method
-			controller.print(sb.toString());
-		}
-		/**
-		 * @param maze 2d int representation of maze //TODO - change to global function
-		 */
-		private String maze2dToString(int[][] maze) {
-			StringBuilder sb = new StringBuilder();
-			sb.append("{\n");
-			for (int i = 0 ; i < (maze.length - 1) ; i++) {
-				sb.append("\t{");
-				for (int j = 0 ; j < (maze[i].length - 1) ; j++)
-					sb.append(maze[i][j] + ", ");
-				sb.append(maze[i][maze[i].length - 1] + "},\n");
-			}
-			sb.append("\t{");
-			for (int i = 0 ; i < (maze[maze.length - 1].length - 1) ; i++)
-				sb.append(maze[maze.length - 1][i] + ", ");
-			sb.append(maze[maze.length - 1][maze[maze.length - 1].length - 1] + "}\n");
-			sb.append("}");
-			return sb.toString();
 		}
 	}
 	/**
@@ -134,47 +123,31 @@ public class CommandsManager {
 		 */
 		@Override
 		public void doCommand(String args[]) {
-			this.mazeName = args[0];
-			this.mazes = model.getMazes();
-			this.axis = (args[1]).toCharArray()[0];
-			this.index = Integer.parseInt(args[2]);
-			StringBuilder sb = new StringBuilder();
-			if (!mazes.containsKey(mazeName))
-				sb.append("No such maze " + mazeName);
+			if ((args == null) || (args.length != 3))
+				controller.print("display_cross_section command need 3 arguments:\ndisplay_cross_section <MAZE_NAME> <AXIS> <INDEX>");
 			else {
-				Maze3d maze = mazes.get(mazeName);
-				int[][] maze2d;
-				if (axis == 'X')
-					maze2d = maze.getCrossSectionByX(index);
-				else if (axis == 'Y')
-					maze2d = maze.getCrossSectionByY(index);
-				else if (axis == 'Z')
-					maze2d = maze.getCrossSectionByZ(index);
-				else
-					throw new IllegalArgumentException("No such axis " + axis);
-				sb.append(maze2dToString(maze2d));
+				this.mazeName = args[0];
+				this.mazes = model.getMazes();
+				this.axis = (args[1]).toCharArray()[0];
+				this.index = Integer.parseInt(args[2]);
+				StringBuilder sb = new StringBuilder();
+				if (!mazes.containsKey(mazeName))
+					sb.append("No such maze " + mazeName);
+				else {
+					Maze3d maze = mazes.get(mazeName);
+					int[][] maze2d;
+					if (axis == 'X')
+						maze2d = maze.getCrossSectionByX(index);
+					else if (axis == 'Y')
+						maze2d = maze.getCrossSectionByY(index);
+					else if (axis == 'Z')
+						maze2d = maze.getCrossSectionByZ(index);
+					else
+						throw new IllegalArgumentException("No such axis " + axis);
+					sb.append(maze2dToString(maze2d));
+				}
+				controller.print(sb.toString());
 			}
-			controller.print(sb.toString());
-		}
-		/**
-		 * 
-		 * @param maze 2d int representation of maze //TODO - change to global function
-		 */
-		private String maze2dToString(int[][] maze) {
-			StringBuilder sb = new StringBuilder();
-			sb.append("{\n");
-			for (int i = 0 ; i < (maze.length - 1) ; i++) {
-				sb.append("\t{");
-				for (int j = 0 ; j < (maze[i].length - 1) ; j++)
-					sb.append(maze[i][j] + ", ");
-				sb.append(maze[i][maze[i].length - 1] + "},\n");
-			}
-			sb.append("\t{");
-			for (int i = 0 ; i < (maze[maze.length - 1].length - 1) ; i++)
-				sb.append(maze[maze.length - 1][i] + ", ");
-			sb.append(maze[maze.length - 1][maze[maze.length - 1].length - 1] + "}\n");
-			sb.append("}");
-			return sb.toString();
 		}
 	}
 	/**
@@ -189,14 +162,18 @@ public class CommandsManager {
 		 */
 		@Override
 		public void doCommand(String args[]) {
-			this.mazeName = args[0];
-			this.solutions = model.getSolutions();
-			Solution<Position> sol = solutions.get(mazeName);
-			if (solutions.containsKey(mazeName)) {
-				controller.print(sol.toString());
-			}
+			if ((args == null) || (args.length != 1))
+				controller.print("display_solution command need 1 argument:\ndisplay_solution <MAZE_NAME>");
 			else {
-				controller.print("No solution found for maze " + mazeName);
+				this.mazeName = args[0];
+				this.solutions = model.getSolutions();
+				Solution<Position> sol = solutions.get(mazeName);
+				if (solutions.containsKey(mazeName)) {
+					controller.print(sol.toString());
+				}
+				else {
+					controller.print("No solution found for maze " + mazeName);
+				}
 			}
 		}
 	}
@@ -228,12 +205,16 @@ public class CommandsManager {
 		 */
 		@Override
 		public void doCommand(String args[]) {
-			this.mazeName = args[0];
-			this.floors = Integer.parseInt(args[1]);
-			this.rows = Integer.parseInt(args[2]);
-			this.columns = Integer.parseInt(args[3]);
-			this.alg = args[4];
-			model.generateMaze(mazeName, floors, rows, columns, alg);
+			if ((args == null) || (args.length != 5))
+				controller.print("generate_maze command need 5 arguments:\ngenerate_maze <MAZE_NAME> <FLOORS> <ROWS> <COLUMNS> <ALGORITHM>");
+			else {
+				this.mazeName = args[0];
+				this.floors = Integer.parseInt(args[1]);
+				this.rows = Integer.parseInt(args[2]);
+				this.columns = Integer.parseInt(args[3]);
+				this.alg = args[4];
+				model.generateMaze(mazeName, floors, rows, columns, alg);
+			}
 		}
 	}
 	/**
@@ -248,9 +229,13 @@ public class CommandsManager {
 		 */
 		@Override
 		public void doCommand(String args[]) {
-			this.mazeName = args[0];
-			this.fileName = args[1];
-			model.loadMaze(mazeName, fileName);
+			if ((args == null) || (args.length != 2))
+				controller.print("load_maze command need 2 arguments:\nload_maze <MAZE_NAME> <FILE_NAME>");
+			else {
+				this.mazeName = args[0];
+				this.fileName = args[1];
+				model.loadMaze(mazeName, fileName);
+			}
 		}
 	}
 	/**
@@ -265,9 +250,13 @@ public class CommandsManager {
 		 */
 		@Override
 		public void doCommand(String args[]) {
-			this.mazeName = args[0];
-			this.fileName = args[1];
-			model.saveMaze(mazeName, fileName);
+			if ((args == null) || (args.length != 2))
+				controller.print("save_maze command need 2 arguments:\nsave_maze <MAZE_NAME> <FILE_NAME>");
+			else {
+				this.mazeName = args[0];
+				this.fileName = args[1];
+				model.saveMaze(mazeName, fileName);
+			}
 		}
 	}
 	/**
@@ -283,9 +272,33 @@ public class CommandsManager {
 		 */
 		@Override
 		public void doCommand(String args[]) {
-			this.mazeName = args[0];
-			this.alg = args[1];
-			model.solveMaze(mazeName, alg);
+			if ((args == null) || (args.length != 2))
+				controller.print("solve command need 2 arguments:\nsolve <MAZE_NAME> <ALGORITHM>");
+			else {
+				this.mazeName = args[0];
+				this.alg = args[1];
+				model.solveMaze(mazeName, alg);
+			}
 		}
+	}
+	/**
+	 * Private method to convert 2d int maze to String
+	 * @param maze 2d int representation of maze
+	 */
+	private String maze2dToString(int[][] maze) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("{\n");
+		for (int i = 0 ; i < (maze.length - 1) ; i++) {
+			sb.append("\t{");
+			for (int j = 0 ; j < (maze[i].length - 1) ; j++)
+				sb.append(maze[i][j] + ", ");
+			sb.append(maze[i][maze[i].length - 1] + "},\n");
+		}
+		sb.append("\t{");
+		for (int i = 0 ; i < (maze[maze.length - 1].length - 1) ; i++)
+			sb.append(maze[maze.length - 1][i] + ", ");
+		sb.append(maze[maze.length - 1][maze[maze.length - 1].length - 1] + "}\n");
+		sb.append("}");
+		return sb.toString();
 	}
 }
